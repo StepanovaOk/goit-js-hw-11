@@ -3,6 +3,11 @@ import 'izitoast/dist/css/iziToast.min.css';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
+let galleryLightbox = new SimpleLightbox('.image-link', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
+
 const form = document.querySelector('.form');
 const searchInput = document.querySelector('.input-name');
 const loader = document.querySelector('.loader');
@@ -99,10 +104,6 @@ function renderPhotos(photos) {
     );
     gallery.insertAdjacentHTML('beforeend', photoElement);
   });
-  gallery.refresh();
-}
 
-let galleryLightbox = new SimpleLightbox('.image-link', {
-  captionsData: 'alt',
-  captionDelay: 250,
-});
+  lightbox.refresh();
+}
