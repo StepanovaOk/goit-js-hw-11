@@ -1,5 +1,7 @@
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const form = document.querySelector('.form');
 const searchInput = document.querySelector('.input-name');
@@ -39,10 +41,22 @@ function getPhoto(event) {
     .catch(error => console.log('Error fetching data:', error));
 }
 
-function makeMarkup(webformatURL, tags, likes, views, comments, downloads) {
+function makeMarkup(
+  webformatURL,
+  largeImageURL,
+  tags,
+  likes,
+  views,
+  comments,
+  downloads
+) {
   return `<li class="photo">
     <div class="card-image">
-      <img src="${webformatURL}" alt=${tags}></img>
+    <div class="gallery-container">
+    <a href="${largeImageURL}">
+    <img class="gallery-image" src="${webformatURL}" data-source="${largeImageURL}" alt="${tags}"></img>
+    </a>
+    </div>
       <div class="description">
         <p> Likes ${likes}</p>
         <p> Views ${views}</p>
@@ -53,10 +67,10 @@ function makeMarkup(webformatURL, tags, likes, views, comments, downloads) {
   </li>`;
 }
 
-function renderPhotos(photo) {
+function renderPhotos(photos) {
   gallery.innerHTML = '';
 
-  photo.forEach(photo => {
+  photos.forEach(photo => {
     const {
       webformatURL,
       largeImageURL,
@@ -68,6 +82,7 @@ function renderPhotos(photo) {
     } = photo;
     const photoElement = makeMarkup(
       webformatURL,
+      largeImageURL,
       tags,
       likes,
       views,
@@ -77,3 +92,8 @@ function renderPhotos(photo) {
     gallery.insertAdjacentHTML('beforeend', photoElement);
   });
 }
+
+let galleryLightbox = new SimpleLightbox('.gallery-image', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
