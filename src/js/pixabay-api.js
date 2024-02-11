@@ -22,7 +22,7 @@ function getPhoto(event) {
   const searchQuery = searchInput.value.trim();
 
   if (searchQuery === '') {
-    iziToast.error({
+    iziToast.show({
       title: 'Error',
       message: 'Please enter a search query',
     });
@@ -83,6 +83,15 @@ function makeMarkup(
 function renderPhotos(photos) {
   gallery.innerHTML = '';
 
+  if (photos.length === 0) {
+    iziToast.show({
+      message:
+        'Sorry, there are no images matching your search query. Please try again!',
+      backgroundColor: 'red',
+      messageColor: 'white',
+      messageSize: '25',
+    });
+  }
   photos.forEach(photo => {
     const {
       webformatURL,
@@ -105,5 +114,5 @@ function renderPhotos(photos) {
     gallery.insertAdjacentHTML('beforeend', photoElement);
   });
 
-  lightbox.refresh();
+  galleryLightbox.refresh();
 }

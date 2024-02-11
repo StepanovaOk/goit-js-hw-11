@@ -72,6 +72,10 @@
   color: #fff;
 }
 
+.search-btn:hover {
+  background-color: #6c8cff;
+}
+
 .gallery {
   display: flex;
   justify-content: center;

@@ -11,15 +11,14 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
+
   <body>
     <form class="form">
       <label class="input-label">
         <input
           class="input-name"
-          type="text"
           name="input-name"
           placeholder="Search images..."
           required
@@ -27,12 +26,13 @@
       </label>
       <button class="search-btn" type="submit">Search</button>
     </form>
+
     <div class="loader-container">
       <span class="loader"></span>
     </div>
+
     <ul class="gallery"></ul>
 
     <script type="module" src="./js/pixabay-api.js"></script>
-    <script type="module" src="./main.js"></script>
   </body>
 </html>
