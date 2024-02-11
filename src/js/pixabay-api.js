@@ -51,18 +51,14 @@ function makeMarkup(
   downloads
 ) {
   return `<li class="photo">
-    <div class="card-image">
-    <div class="gallery-container">
     <a href="${largeImageURL}">
-    <img class="gallery-image" src="${webformatURL}" data-source="${largeImageURL}" alt="${tags}"></img>
+    <img class="gallery-image" src="${webformatURL}" alt="${tags}"></img>
     </a>
-    </div>
       <div class="description">
         <p> Likes ${likes}</p>
         <p> Views ${views}</p>
         <p> Comments ${comments}</p>
         <p> Downloads ${downloads}</p>
-      </div>
     </div>
   </li>`;
 }
