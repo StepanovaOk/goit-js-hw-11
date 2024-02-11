@@ -51,14 +51,17 @@ function makeMarkup(
   downloads
 ) {
   return `<li class="photo">
+  <div class="photo-card">
     <a href="${largeImageURL}">
-    <img class="gallery-image" src="${webformatURL}" alt="${tags}"></img>
+    <img class="gallery-image" data-source="${largeImageURL}" src="${webformatURL}" alt="${tags}"></img>
     </a>
+    </div>
       <div class="description">
-        <p> Likes ${likes}</p>
-        <p> Views ${views}</p>
-        <p> Comments ${comments}</p>
-        <p> Downloads ${downloads}</p>
+        <p class="description-item"> Likes ${likes}</p>
+        <p class="description-item"> Views ${views}</p>
+        <p class="description-item"> Comments ${comments}</p>
+        <p class="description-item"> Downloads ${downloads}</p>
+    
     </div>
   </li>`;
 }
@@ -90,6 +93,7 @@ function renderPhotos(photos) {
 }
 
 let galleryLightbox = new SimpleLightbox('.gallery-image', {
+  sourceAttr: 'data-source',
   captionsData: 'alt',
   captionDelay: 250,
 });
