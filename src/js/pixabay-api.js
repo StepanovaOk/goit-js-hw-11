@@ -5,6 +5,7 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const form = document.querySelector('.form');
 const searchInput = document.querySelector('.input-name');
+const loader = document.querySelector('.loader');
 
 const gallery = document.querySelector('.gallery');
 
@@ -35,10 +36,18 @@ function getPhoto(event) {
 
   const url = `${BASE_URL}${END_POINT}?${params}`;
 
+  loader.classList.add('visible');
+
   fetch(url)
     .then(res => res.json())
-    .then(data => renderPhotos(data.hits))
-    .catch(error => console.log('Error fetching data:', error));
+    .then(data => {
+      renderPhotos(data.hits);
+      loader.classList.remove('visible');
+    })
+    .catch(error => {
+      console.log('Error fetching data:', error);
+      loader.classList.remove('visible');
+    });
 }
 
 function makeMarkup(
@@ -52,8 +61,8 @@ function makeMarkup(
 ) {
   return `<li class="photo">
   <div class="photo-card">
-    <a href="${largeImageURL}">
-    <img class="gallery-image" data-source="${largeImageURL}" src="${webformatURL}" alt="${tags}"></img>
+    <a class="image-link" data-lightbox="image" href="${largeImageURL}">
+    <img class="gallery-image" data-source="${largeImageURL}"  src="${webformatURL}" alt="${tags}"></img>
     </a>
     </div>
       <div class="description">
@@ -90,10 +99,10 @@ function renderPhotos(photos) {
     );
     gallery.insertAdjacentHTML('beforeend', photoElement);
   });
+  gallery.refresh();
 }
 
-let galleryLightbox = new SimpleLightbox('.gallery-image', {
-  sourceAttr: 'data-source',
+let galleryLightbox = new SimpleLightbox('.image-link', {
   captionsData: 'alt',
   captionDelay: 250,
 });
